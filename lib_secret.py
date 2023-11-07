@@ -8,7 +8,7 @@ def add_secret_key_value(key, value):
 
     command = f'kubectl patch secret {secret_name} -p '
     command += f'{{"data":{{"{key}":"{encoded_value}"}}}}'  
-    print(command)
+    #print(command)
     subprocess.run(command.split(' '))
 
 # Define a function to get the value of a key from the secret object
@@ -18,10 +18,10 @@ def get_secret_key_value(key):
     # To get the value of a key from a secret object:  
     command = f'kubectl get secret {secret_name} -o '
     command += f"jsonpath={{.data.{key}}}"
-    print(command)
+    #print(command)
     result = subprocess.run(command.split(' '), stdout=subprocess.PIPE)
     value = base64.b64decode(result.stdout).decode('utf-8')
-    print(f'Value of key {key} is {value}')
+    #print(f'Value of key {key} is {value}')
     return value
 
 # Example usage: add or update a key-value pair in the secret object
